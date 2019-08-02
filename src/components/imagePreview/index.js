@@ -1,2 +1,2 @@
-import imagePreview from './src/index.vue';
-export default imagePreview;
+import vueImagePreview from './src/index.vue';
+export default vueImagePreview;

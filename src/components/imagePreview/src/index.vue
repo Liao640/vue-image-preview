@@ -1,5 +1,5 @@
 <template>
-<div class="shade_bg" v-show="visible">
+<div class="shade_bg" v-show="visible" @click.stop.prevent="" @scroll.stop.prevent="">
 	<!-- <div class="image_preview_wapper" @click.stop=""> -->
 	<div class="image_preview_wapper" :style="{ width: width, height: height}">
 		<!-- 按钮控制器 -->
@@ -249,18 +249,19 @@ export default {
 	// 控制条
 	.control_bar {
 		width: 100%;
-		height: 55px;
-		line-height: 55px;
+		height: 35px;
+		line-height: 35px;
     box-sizing: border-box;
-		padding: 0 32px;
+		padding: 0 24px;
 		border-radius: 4px 4px 0 0;
     background-color: #F5F5F5;
 		// display: flex;
 		// justify-content: space-between;
 		.title, .image_num {
+      line-height: 35px;
       color: #333;
       font-weight: 500;
-      font-size: 16px;
+      font-size: 14px;
       float: left;
 		}
     .image_num {
@@ -277,10 +278,10 @@ export default {
 			position: relative;
 			i {
 				display: block;
-				width: 16px;
-				height: 16px;
-				line-height: 16px;
-				margin-left:14px;
+				width: 14px;
+				height: 14px;
+				line-height: 14px;
+				margin-left:12px;
 				cursor: pointer;
 				background-size: 100% 100%;
 			}
@@ -310,8 +311,8 @@ export default {
 				}
 			}
 			.close_icon {
-        width: 14px;
-				height: 14px;
+        width: 12px;
+				height: 12px;
 				background-image: url("/static/img/imagePreview/close.svg");
 				&:hover{
           background-image: url("/static/img/imagePreview/close_active.svg");
@@ -319,7 +320,7 @@ export default {
 			}
 			.splice_line {
 				width: 1px;
-				height: 16px;
+				height: 14px;
 				background-color: #C8C8C8;
 			}
 		}
@@ -328,7 +329,7 @@ export default {
 	// 图片展示区
 	.image_show_box {
 		width: 100%;
-		height: calc(100% - 55px);
+		height: calc(100% - 35px);
 		position: relative;
 		overflow: hidden;
 		// 左右翻页按钮
