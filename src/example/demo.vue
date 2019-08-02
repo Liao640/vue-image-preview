@@ -4,7 +4,7 @@
     <div class="sigle_show_box">
       <p>预览单张图片</p>
       <img :src="images1[0]" @click="handleClick1()" alt="海边沙滩图">
-      <vueImagePreview :visible.sync="visible1" :images="images1"></vueImagePreview>
+      <vue-image-preview :visible.sync="visible1" :images="images1"></vue-image-preview>
     </div>
     <!-- 预览多张图片 -->
     <div class="multi_show_box">
