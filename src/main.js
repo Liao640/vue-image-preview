@@ -3,8 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import XhImagePreview from "@/components/image-preview"
 
 Vue.config.productionTip = false
+Vue.use(XhImagePreview)
 
 /* eslint-disable no-new */
 new Vue({

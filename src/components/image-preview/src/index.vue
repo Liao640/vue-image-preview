@@ -50,7 +50,7 @@
 </template>
 <script>
 export default {
-  name: 'vueImagePreview',
+  name: 'XhImagePreview',
 	data() {
 		return {
 			imgIndex: -1,

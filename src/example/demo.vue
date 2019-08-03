@@ -4,7 +4,7 @@
     <div class="sigle_show_box">
       <p>预览单张图片</p>
       <img :src="images1[0]" @click="handleClick1()" alt="海边沙滩图">
-      <vue-image-preview :visible.sync="visible1" :images="images1"></vue-image-preview>
+      <xh-image-preview :visible.sync="visible1" :images="images1"></xh-image-preview>
     </div>
     <!-- 预览多张图片 -->
     <div class="multi_show_box">
@@ -14,25 +14,25 @@
           <img :src="img" @click="handleClick2(img)" alt="海边沙滩图">  
         </div> 
       </div>
-      <vue-image-preview :visible.sync="visible2" :images="images2" :defaultImage="defaultImage"></vue-image-preview>
+      <xh-image-preview :visible.sync="visible2" :images="images2" :defaultImage="defaultImage"></xh-image-preview>
     </div>
     <!-- 配置预览尺寸：600px*400px -->
     <div class="sigle_show_box">
       <p>配置预览尺寸：600px*400px</p>
        <img :src="images3[0]" @click="handleClick3()" alt="海边沙滩图">
-      <vue-image-preview :visible.sync="visible3" :images="images3" width="600px" height="400px"></vue-image-preview>
+      <xh-image-preview :visible.sync="visible3" :images="images3" width="600px" height="400px"></xh-image-preview>
     </div>
     <!-- 配置操作按钮键：600px*400px -->
     <div class="sigle_show_box">
       <p>配置预览尺寸：600px*400px</p>
        <img :src="images4[0]" @click="handleClick4()" alt="海边沙滩图">
-      <vue-image-preview :visible.sync="visible4" :images="images4" width="600px" height="400px" layout="rotate"></vue-image-preview>
+      <xh-image-preview :visible.sync="visible4" :images="images4" width="600px" height="400px" layout="rotate"></xh-image-preview>
     </div>
   </div>
 
 </template>
 <script>
-import vueImagePreview from "@/components/imagePreview"
+// import XhImagePreview from "@/components/image-preview"
 //导出home组件模块
 export default {
   name: 'demo',
@@ -61,7 +61,7 @@ export default {
     // ...mapState(['refreshFlag', 'callStatus', 'systemMsg', 'updateSysMsg']),
   },
   components: {
-    vueImagePreview
+    // XhImagePreview
   },
   watch: {
     

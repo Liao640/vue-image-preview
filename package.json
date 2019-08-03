@@ -1,9 +1,10 @@
 {
-  "name": "vue-img-preview",
+  "name": "xh-image-preview",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "基于vue封装的图片预览组件",
   "author": "lsp <13682561462@163.com>",
-  "private": true,
+  "private": false,
+  "keywords": ["image", "preview"],
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
