@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import XhImagePreview from "@/components/image-preview"
+// import XhImagePreview from "/dist/XhImagePreview"
 
 Vue.config.productionTip = false
 Vue.use(XhImagePreview)

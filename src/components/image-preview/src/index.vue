@@ -5,7 +5,7 @@
 		<!-- 按钮控制器 -->
 		<div class="control_bar">
 			<div class="title">查看图片</div>
-      <div class="image_num" v-show="layoutArr.indexOf('total') != -1">{{imgIndex+1}}/{{images.length}}</div>
+      <div class="image_num" v-show="layoutArr.indexOf('total') != -1">{{imgIndex+1}}/{{imgLen}}</div>
 			<div class="control_btn">
 				<i v-show="layoutArr.indexOf('zoomIn') != -1" class="zoom_in_icon" @click="zoomIn"></i>
 				<i v-show="layoutArr.indexOf('actualSize') != -1" class="default_size_icon" @click="actualSize"></i>
@@ -39,7 +39,7 @@
 				<i class="prev_icon"></i>
 				</div>
 			<div
-			v-show="imgIndex < images.length - 1"
+			v-show="imgIndex < imgLen - 1"
 			class="btn_next" 
 			@click="next">
 				<i class="next_icon"></i>
@@ -97,12 +97,16 @@ export default {
 	watch: {
 		defaultImage() {	
 			this.imgUrl = this.defaultImage || this.images[0]
+			this.imgIndex = this.images && this.images.indexOf(this.imgUrl)
 		},
-		imgUrl() {
-			this.imgIndex = this.images.indexOf(this.imgUrl)	
-		},
+		imgIndex() {
+			this.imgUrl = this.images[this.imgIndex]
+		}
 	},
 	computed: {
+		imgLen() {
+			return this.images && this.images.length || 0
+		},
 	},
 	beforeDestroy() {
 
@@ -110,26 +114,25 @@ export default {
 	components: {},
 	mounted() {
 		// 有默认值传显示默认值，没有默认值，显示照片集第一张
-		this.imgUrl = this.defaultImage || this.images[0]
+		this.imgUrl = this.defaultImage || this.images && this.images[0] || require('../../../assets/no_data.png')
+		this.imgIndex = this.images ? this.images.indexOf(this.imgUrl) : -1
 		// 控制器动态显示
 		this.layoutArr = this.layout && this.layout.split(',').map((item) => item.trim());
 	},
 	methods: {
 		prev() {
       if (this.imgIndex <= 0) {
-        this.imgUrl = this.images[this.images.length - 1];
-        this.imgIndex = this.images.length - 1;
+        this.imgIndex = this.images.length - 1
       } else {
-        this.imgUrl = this.images[--this.imgIndex];
+				this.imgIndex--
       }
 			this.resetData()
     },
     next() {
       if (this.imgIndex >= this.images.length - 1) {
-        this.imgUrl = this.images[0]
         this.imgIndex = 0
       } else {
-        this.imgUrl = this.images[++this.imgIndex]
+				this.imgIndex++
 			}
 			this.resetData()
 		},
@@ -225,7 +228,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-// $imagePreview: '/static/img/imagePreview';  
+// $imagePreview: '../../../assets/imagePreview';  
 .shade_bg {
   position: fixed;
   z-index: 1999;
@@ -287,36 +290,36 @@ export default {
 				background-size: 100% 100%;
 			}
 			.zoom_in_icon {
-        background-image: url("/static/img/imagePreview/zoom_in.svg");
+        background-image: url("../../../assets/imagePreview/zoom_in.svg");
 				// @include img('/imagePreview/zoom_in.svg');
 				&:hover{
-          background-image: url("/static/img/imagePreview/zoom_in_active.svg");
+          background-image: url("../../../assets/imagePreview/zoom_in_active.svg");
 				}
 			}
 			.zoom_out_icon {
-        background-image: url("/static/img/imagePreview/zoom_out.svg");
+        background-image: url("../../../assets/imagePreview/zoom_out.svg");
 				&:hover{
-          background-image: url("/static/img/imagePreview/zoom_out_active.svg");
+          background-image: url("../../../assets/imagePreview/zoom_out_active.svg");
 				}
 			}
 			.default_size_icon {
-         background-image: url("/static/img/imagePreview/default_size.svg");
+         background-image: url("../../../assets/imagePreview/default_size.svg");
 				&:hover{
-          background-image: url("/static/img/imagePreview/default_size_active.svg");
+          background-image: url("../../../assets/imagePreview/default_size_active.svg");
 				}
 			}
 			.rotate_icon{
-        background-image: url("/static/img/imagePreview/rotate.svg");
+        background-image: url("../../../assets/imagePreview/rotate.svg");
 				&:hover{
-          background-image: url("/static/img/imagePreview/rotate_active.svg");
+          background-image: url("../../../assets/imagePreview/rotate_active.svg");
 				}
 			}
 			.close_icon {
         width: 12px;
 				height: 12px;
-				background-image: url("/static/img/imagePreview/close.svg");
+				background-image: url("../../../assets/imagePreview/close.svg");
 				&:hover{
-          background-image: url("/static/img/imagePreview/close_active.svg");
+          background-image: url("../../../assets/imagePreview/close_active.svg");
 				}
 			}
 			.splice_line {
@@ -345,16 +348,16 @@ export default {
 		}
 		.btn_prev {
 			left: 16px;
-      background-image: url("/static/img/imagePreview/prev.svg");
+      background-image: url("../../../assets/imagePreview/prev.svg");
 			&:hover{
-			  background-image: url("/static/img/imagePreview/prev_active.svg");
+			  background-image: url("../../../assets/imagePreview/prev_active.svg");
 			}
 		}
 		.btn_next {
 			right: 16px;
-      background-image: url("/static/img/imagePreview/next.svg");
+      background-image: url("../../../assets/imagePreview/next.svg");
 			&:hover{
-        background-image: url("/static/img/imagePreview/next_active.svg");
+        background-image: url("../../../assets/imagePreview/next_active.svg");
 			}
 		}
 	}
@@ -367,7 +370,9 @@ export default {
 		justify-content: center;
 		align-items: center;
 		// transition: transform .4s;
-		cursor: grab;
+		img {
+			cursor: grab;
+		}
 		img.default_size  {
 			max-width: 100%;
 			max-height: 100%;
